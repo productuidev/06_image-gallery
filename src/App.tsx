@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './App.css';
+import ImageBox from './components/ImageBox';
 
 function App() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className="container">
         <div className="initial--box">
           <div className="text--center">
             이미지가 없습니다.<br />이미지를 추가해주세요.
           </div>
-          <div className="plus--box">
+          <input type="file" ref={inputRef}
+            onChange={(event)=>{
+              console.log("hello")
+              console.log(event.target.value)
+            }}
+          />
+          <div
+              className="plus--box"
+              onClick={()=>{
+              inputRef.current?.click()
+            }}
+          >
             +
           </div>
         </div>
+        <ImageBox src="hello" />
+        <ImageBox src="hello" />
+        <ImageBox src="hello" />
+        <ImageBox src="hello" />
     </div>
   );
 }
