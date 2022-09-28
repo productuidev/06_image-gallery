@@ -1,9 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.css';
 import ImageBox from './components/ImageBox';
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const [imageList, setImageList] = useState<string[]>([]);
+
+  console.log(imageList)
 
   return (
     <div className="container">
@@ -14,7 +18,9 @@ function App() {
           <input type="file" ref={inputRef}
             onChange={(event)=>{
               console.log("hello")
-              console.log(event.target.value)
+              console.log(event.currentTarget.value)
+
+              // setImageList(prev => [...prev, event.currentTarget.value])
             }}
           />
           <div
@@ -26,10 +32,10 @@ function App() {
             +
           </div>
         </div>
+        {/* <ImageBox src="hello" />
         <ImageBox src="hello" />
         <ImageBox src="hello" />
-        <ImageBox src="hello" />
-        <ImageBox src="hello" />
+        <ImageBox src="hello" /> */}
     </div>
   );
 }
