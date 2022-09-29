@@ -12,15 +12,33 @@ function App() {
   return (
     <div className="container">
         <div className="initial--box">
-          <div className="text--center">
+          {/* 방법 1 : 삼항연산자 */}
+          {/* <div className={imageList.length === 0 ? '' : 'text--center'}>
             이미지가 없습니다.<br />이미지를 추가해주세요.
-          </div>
+          </div> */}
+
+          {/* 방법 2 : 자바스크립트 속성 활용
+            true && true // true
+            true && 1 // 1
+            true && 0 // 0
+            true && 0 && 1 // 0
+          */}
+          { imageList.length === 0 &&
+            <div className="text--center">
+              이미지가 없습니다.<br />이미지를 추가해주세요.
+            </div>
+          }
+
           <input type="file" ref={inputRef}
             onChange={(event)=>{
-              console.log("hello")
-              console.log(event.currentTarget.value)
+              // console.log("hello")
+              // console.log(event.currentTarget.value)
 
-              // setImageList(prev => [...prev, event.currentTarget.value])
+              if(event.currentTarget.value){
+                const v = event.currentTarget.value;
+
+                setImageList(prev => [...prev, v])
+              }
             }}
           />
           <div
