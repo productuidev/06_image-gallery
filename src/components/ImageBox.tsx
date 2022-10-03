@@ -1,9 +1,10 @@
 function ImageBox(props:{
   src: string;
+  alt: string;
 }) {
   return (
-    <div className="image--box">
-      <img src={props.src} />
+    <div className="gallery--box">
+      <img src={props.src} alt={props.alt} />
     </div>
   )
 }

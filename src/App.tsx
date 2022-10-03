@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="container">
-        <div className="initial--box">
+        <div className={'gallery--box ' + (imageList.length > 0 && 'row')}>
           {/* 방법 1 : 삼항연산자 */}
           {/* <div className={imageList.length === 0 ? '' : 'text--center'}>
             이미지가 없습니다.<br />이미지를 추가해주세요.
@@ -34,10 +34,17 @@ function App() {
               // console.log("hello")
               // console.log(event.currentTarget.value)
 
-              if(event.currentTarget.value){
-                const v = event.currentTarget.value;
+              if(event.currentTarget.files?.[0]){
+                const file = event.currentTarget.files[0];
+                console.log(file.name)
 
-                setImageList(prev => [...prev, v])
+                const reader = new FileReader();
+                reader.readAsDataURL(file)
+                reader.onloadend = (event) => {
+                  setImageList(prev => [...prev, event.target?.result as string])
+                }
+
+                // setImageList(prev => [...prev, v])
               }
             }}
           />
@@ -54,6 +61,9 @@ function App() {
         <ImageBox src="hello" />
         <ImageBox src="hello" />
         <ImageBox src="hello" /> */}
+        {
+          imageList.map((el, idx)=><ImageBox key={el + idx} src={el} alt={el} />)
+        }
     </div>
   );
 }

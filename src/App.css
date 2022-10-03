@@ -11,11 +11,12 @@ table {border-collapse: collapse;border-spacing: 0;}
 
 input {display:none;}
 
-.container {width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
-.initial--box {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:80px;}
+.container {width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.gallery--box {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;}
 @media screen and (max-width: 500px) {
-  .initial--box { gap:40px; }
+  .gallery--box { gap:20px; }
 }
+.row {flex-direction:row;justify-content:flex-start;gap:100px;width:100%;overflow-x:hidden;}
 .text--center {text-align:center;}
 .plus--box {display:flex;align-items:center;justify-content:center;width:100px;height:100px;border:1px solid #333;font-size:24px;line-height:24px;}
 
@@ -26,4 +27,5 @@ input {display:none;}
 .space-sm {margin-top:16px;}
 .space-xs {margin-top:8px;}
 
-.image--box {width:200px;height:200px;min-width:200px;min-height:200px;}
+.gallery--box {width:200px;height:200px;min-width:200px;min-height:200px;margin-top:20px;}
+.gallery--box img {width:200px;height:200px;}
