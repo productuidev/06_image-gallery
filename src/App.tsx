@@ -10,7 +10,7 @@ function App() {
   console.log(imageList)
 
   return (
-    <div className="container">
+    <div className={'container ' + (imageList.length > 0 && 'true')}>
         <div className={'gallery--box ' + (imageList.length > 0 && 'true')}>
           <input type="file" ref={inputRef}
             onChange={(event)=>{
