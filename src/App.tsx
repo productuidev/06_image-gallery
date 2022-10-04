@@ -1,41 +1,46 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import './App.css';
 import ImageBox from './components/ImageBox';
+import { useDropzone } from 'react-dropzone'
 
 function App() {
-  const inputRef = useRef<HTMLInputElement>(null);
+  // const inputRef = useRef<HTMLInputElement>(null);
 
   const [imageList, setImageList] = useState<string[]>([]);
+
+  const onDrop = useCallback((acceptedFiles: any) => {
+    console.log(acceptedFiles)
+
+    if(acceptedFiles.length){
+      for(const file of acceptedFiles) {
+        // console.log(file.name)
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onloadend = (event) => {
+          setImageList(prev => [...prev, event.target?.result as string])
+        }
+      }
+    }
+
+  }, [])
+  const {getRootProps, getInputProps} = useDropzone({onDrop})
 
   console.log(imageList)
 
   return (
-    <div className={'container ' + (imageList.length > 0 && 'true')}>
+    <div className="container">
         <div className={'gallery--box ' + (imageList.length > 0 && 'true')}>
-          <input type="file" ref={inputRef}
-            onChange={(event)=>{
-              // console.log("hello")
-              // console.log(event.currentTarget.value)
-
-              if(event.currentTarget.files?.[0]){
-                const file = event.currentTarget.files[0];
-                console.log(file.name)
-
-                const reader = new FileReader();
-                reader.readAsDataURL(file)
-                reader.onloadend = (event) => {
-                  setImageList(prev => [...prev, event.target?.result as string])
-                }
-
-                // setImageList(prev => [...prev, v])
-              }
-            }}
+          <input type="file"
+            // ref={inputRef}
+            {...getInputProps()}
           />
-          <div
-              className="plus--btn"
-              onClick={()=>{
-              inputRef.current?.click()
-            }}
+          <div className="plus--btn"
+            {...getRootProps()}
+            // onClick={()=>{
+            //   console.log("hello")
+            //   inputRef.current?.click()
+            // }}
           >
             +
           </div>
