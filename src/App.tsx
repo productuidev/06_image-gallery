@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import './App.css';
 import ImageBox from './components/ImageBox';
 import { useDropzone } from 'react-dropzone'
@@ -26,7 +26,7 @@ function App() {
   }, [])
   const {getRootProps, getInputProps} = useDropzone({onDrop})
 
-  console.log(imageList)
+  // console.log(imageList)
 
   return (
     <div className="container">
@@ -70,7 +70,7 @@ function App() {
         <ImageBox src="hello" /> */}
 
         {
-          imageList.map((el, idx)=><ImageBox key={el + idx} src={el} alt={el} />)
+          imageList.map((el, idx, onRemove)=><ImageBox key={el + idx} src={el} alt={el} />)
         }
     </div>
   );
